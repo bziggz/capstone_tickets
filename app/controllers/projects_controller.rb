@@ -19,10 +19,11 @@ class ProjectsController < ApplicationController
     @project = Project.new(params.require(:project).permit(:name, :description))
 
     if @project.save
-      flash[:success] = "Your project has been added to the system."
+      flash[:notice] = "Your project has been added to the system."
+
       redirect_to projects_path
     else
-      render new_project_path
+      render :new
     end
   end
 

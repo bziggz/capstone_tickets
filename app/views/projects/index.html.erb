@@ -12,10 +12,14 @@
     <% @projects.each do |project| %>
       <tr>
         <td>
-          <%= link_to project.name, project_path %>
+          <%= link_to project.name, project_path(project.id) %><br>
+          <%= project.description%>          
         </td>
         <td>
-          <%= project.description%>
+          <%= project.tickets.size - project.tickets.where(status: 'fixed' ).size %>
+        </td>
+        <td>
+          <%= project.tickets.size %>
         <td>
       </tr>
     <% end %>
