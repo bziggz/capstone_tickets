@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
 
     if @ticket.save
       flash[:success] = 'Ticket had been created.'
-      redirect_to project_path(:project_id)
+      redirect_to tickets_path
     else
       render new_ticket_path
     end
@@ -31,7 +31,7 @@ class TicketsController < ApplicationController
 
     if @ticket.update
       flash[:notice] = 'Ticket has been updated.'
-      redirect_to project_path(:project_id)
+      redirect_to tickets_path
     else
       render :edit
     end
@@ -41,6 +41,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
 
     @ticket.destroy
-    redirect_to project_path(:project_id)
+    redirect_to tickets_path
   end
+
+  private
 end
