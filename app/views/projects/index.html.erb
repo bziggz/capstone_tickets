@@ -1,0 +1,26 @@
+<%= render 'shared/navigation' %>
+
+<table class="table table-cell-padding">
+  <thead>
+    <tr>
+      <th >Name</th>
+      <th class='number'>Open Tickets</th>
+      <th class='number'>Total Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td>
+          <%= link_to project.name, project_path %>
+        </td>
+        <td>
+          <%= project.description%>
+        <td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= link_to "New Project" , new_project_path %>
