@@ -3,7 +3,13 @@
 <%= render 'shared/content_title', title: @project.name %>
 
 <p><%= @project.description %></p>
+
+<div>
 <%= link_to 'Edit', edit_project_path(@project.id) %>
 <%= link_to 'Destroy', project_path(@project), method: :delete, data: { confirm: 'Are you sure?' } %>
-
-<%= render 'shared/tickets', ticket_obj: @project.tickets %>
+</div>
+<p></p>
+<div>
+  <h5>Tickets</h5>
+  <%= render 'shared/tickets', ticket_obj: @project.tickets %>
+  </div>

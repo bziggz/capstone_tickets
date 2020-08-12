@@ -1,15 +1,16 @@
-<table class="table table-cell-padding">
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Assignee</th>
-      <th>Status</th>
-      <th>Tags</th> 
+      <th scope='col'>Name</th>
+      <th scope='col'>Assignee</th>
+      <th scope='col'>Status</th>
+      <th scope='col'>Tags</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% ticket_obj.each do |ticket| %>
-      <tr>
+      <tr scope='row'>
         <td>
           <%= link_to ticket.name, ticket_path(ticket.id) %>
         </td>
@@ -18,13 +19,17 @@
         </td>
         <td>
           <%= format_status(ticket) %>
-        <td>
-        <td>
-          <%# <%= ticket.tags %>
         </td>
         <td>
-          <%= link_to 'Edit', edit_ticket_path(ticket.id) %>
-          <%= link_to 'Destroy', ticket_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if ticket.tags.size > 0 %>
+            <%= ticket.tags.map { |tag| tag.name }.join(', ') %>
+          <% end %>
+        </td>
+        <td>
+          <p>
+            <%= link_to 'Edit', edit_ticket_path(ticket.id) %> |
+            <%= link_to 'Delete', ticket_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </p>
         </td>
       </tr>
     <% end %>

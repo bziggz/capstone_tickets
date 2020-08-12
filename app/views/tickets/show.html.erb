@@ -2,11 +2,20 @@
 <%= render 'shared/content_title', title: @ticket.name %>
 
 <p><%= @ticket.body %></p>
-<p><strong>Tags:</strong></p>
+
+<div>
+  <strong>Tags:</strong>
+  <% if @ticket.tags.size > 0 %>
+    <%= @ticket.tags.map { |tag| tag.name}.join(', ') %>
+  <% else %>
+    <%= link_to 'Add a Tag', edit_ticket_path(@ticket.id) %>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_ticket_path(@ticket.id) %>
 <%= link_to 'Destroy', ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<table class="table table-cell-padding">
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>Status</th>
