@@ -14,4 +14,14 @@ module ApplicationHelper
 
     status_hash[ticket.status]
   end
+
+  def tags_array
+    result = []
+
+    Tag.all.each do |tag|
+      result.push([tag.name, tag.id])
+    end
+
+    result
+  end
 end

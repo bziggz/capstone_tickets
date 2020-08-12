@@ -18,6 +18,8 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
 
+    add_tags
+
     if @ticket.save
       flash[:success] = 'Ticket had been created.'
       redirect_to tickets_path
@@ -28,6 +30,8 @@ class TicketsController < ApplicationController
 
   def update
     @ticket = Ticket.find(params[:id])
+
+    add_tags
 
     if @ticket.update(ticket_params)
       flash[:notice] = 'Ticket has been updated.'
@@ -45,6 +49,13 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def add_tags
+    if params[:tags]
+      tags = params[:tags].map {|tag_id| Tag.find(tag_id)}
+      @ticket.tags = tags
+    end
+  end
 
   def ticket_params
     params.require(:ticket).permit(:name, :body, :status, :project_id)

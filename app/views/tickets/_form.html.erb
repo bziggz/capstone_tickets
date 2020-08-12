@@ -22,7 +22,12 @@
   </div>
   <div class='form-group'>
     <%= f.label :tags %><br/>
-    <%= %>
+    <% Tag.all.each do |tag| %>
+      <div class="form-check form-check-inline">
+        <%= check_box_tag 'tags[]', tag.id, @ticket.tags.include?(tag), {class: 'form-check-input'} %>
+        <%= f.label tag.name, class: 'form-check-label' %> 
+      </div>
+    <% end %>
   </div>
   <%= f.submit @ticket.new_record? ? 'Create Ticket' : 'Update Ticket', class: 'btn btn-primary' %>
 <% end %>
