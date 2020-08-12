@@ -1,0 +1,29 @@
+<%= render 'shared/navigation' %>
+<%= render 'shared/content_title', title: 'Tags' %>
+
+<table class='table table-cell-padding'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class='number'>Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td>
+          <%= tag.name %>
+        </td>
+        <td>
+          <%= %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_tag_path(tag.id) %>
+          <%= link_to 'Destroy', tag_path(tag.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Tag', new_tag_path %>

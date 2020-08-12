@@ -25,7 +25,7 @@ class TagsController < ApplicationController
   end
 
   def update
-    if @tag.update(params[:id])
+    if @tag.update(tag_params)
       flash[:success] = "Tag was successfully updated"
       redirect_to tags_path
     else
@@ -45,7 +45,7 @@ class TagsController < ApplicationController
   private
 
   def tag_params
-    params.require(:tag).admit(:name)
+    params.require(:tag).permit(:name)
   end
 
   def find_tag
