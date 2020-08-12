@@ -16,7 +16,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(params.require(:ticket).permit(:name, :body, :status, :project_id))
+    @ticket = Ticket.new(ticket_params)
 
     if @ticket.save
       flash[:success] = 'Ticket had been created.'
@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
 
-    if @ticket.update
+    if @ticket.update(ticket_params)
       flash[:notice] = 'Ticket has been updated.'
       redirect_to tickets_path
     else
@@ -45,4 +45,8 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def ticket_params
+    params.require(:ticket).permit(:name, :body, :status, :project_id)
+  end
 end

@@ -1,0 +1,24 @@
+<%= render 'shared/navigation' %>
+<%= render 'shared/content_title', title: @ticket.name %>
+
+<p><%= @ticket.body %></p>
+<p><strong>Tags:</strong></p>
+<%= link_to 'Edit', edit_ticket_path(@ticket.id) %>
+<%= link_to 'Destroy', ticket_path(@ticket), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<table class="table table-cell-padding">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Creator</th>
+      <th>Assignee></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= format_status(@ticket) %></td>
+      <td><%= %></td>
+      <td><%= %></td>
+    </tr>
+  </tbody>
+<table>

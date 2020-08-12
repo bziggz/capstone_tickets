@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params.require(:project).permit(:name, :description))
+    @project = Project.new(project_params)
 
     if @project.save
       flash[:notice] = 'Your project has been added to the system.'
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    if @project.update
+    if @project.update(project_params)
       flash[:notice] = 'Your project has been updated.'
 
       redirect_to projects_path
@@ -45,5 +45,11 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     redirect_to projects_path
+  end
+
+  private
+
+  def project_params
+    params.require(:project).permit(:name, :description)
   end
 end

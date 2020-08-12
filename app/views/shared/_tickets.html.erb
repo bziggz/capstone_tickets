@@ -17,14 +17,14 @@
           <%= %> 
         </td>
         <td>
-          <%= ticket.status %>
+          <%= format_status(ticket) %>
         <td>
         <td>
           <%# <%= ticket.tags %>
         </td>
         <td>
-          <%= link_to 'Edit', edit_ticket_path(ticket.id), class: 'd-inline-block' %>
-          <%= link_to 'Destroy', project_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_ticket_path(ticket.id) %>
+          <%= link_to 'Destroy', ticket_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
