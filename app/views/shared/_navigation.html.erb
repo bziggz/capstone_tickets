@@ -1,15 +1,41 @@
-<nav class="nav nav-pills">
-  <ul class='left'>
-    <li>
-      <strong>Ticketing</strong>
-      <%= link_to 'Projects', projects_path %>
-      <%= link_to 'Tickets', tickets_path %>
-      <%= link_to 'Tags', tags_path %>
-      <%= link_to 'Log In', '/login' %>
-      <%= link_to 'Sign Up', new_user_path %>
-    </li>
-  </ul>
-  <p id='notice'></p>
-  <p id='alerts'></p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/projects">Ticketing</a>
+
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'Projects', projects_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Tickets', tickets_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Tags', tags_path, class: 'nav-link' %>
+        </li>
+      </ul>
+    </div>
+    <div>
+    <ul class='navbar-nav'>
+      <% if logged_in? %>
+        <li class='nav-item'>
+          <%= link_to current_user.name, edit_user_path(current_user.id), class: 'nav-link' %>
+        </li>
+        <li class='nav-item'>
+          <%= link_to 'Log Out', logout_path, method: :delete, class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class='nav-item'>
+          <%= link_to 'Sign Up', new_user_path, class: 'nav-link' %>
+        </li>
+        <li class='nav-item'>
+          <%= link_to 'Log In', login_url, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+    </div>
+  </div>
 </nav>
-  
