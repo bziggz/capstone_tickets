@@ -20,14 +20,14 @@
     <tr>
       <th>Status</th>
       <th>Creator</th>
-      <th>Assignee></th>
+      <th>Assignee</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= format_status(@ticket) %></td>
-      <td><%= %></td>
-      <td><%= %></td>
+      <td><%= User.find(@ticket.creator_id).name %></td>
+      <td><%= User.find(@ticket.assignee).name %></td>
     </tr>
   </tbody>
 <table>

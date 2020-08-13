@@ -18,9 +18,10 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
+    @ticket.creator_id = current_user.id
 
     add_tags
-
+    puts @ticket
     if @ticket.save
       flash[:success] = 'Ticket had been created.'
       redirect_to tickets_path
@@ -59,6 +60,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name, :body, :status, :project_id, :user_id)
+    params.require(:ticket).permit(:name, :body, :status, :project_id, :assignee)
   end
 end
