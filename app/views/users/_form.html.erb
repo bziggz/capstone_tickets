@@ -1,0 +1,19 @@
+<%= form_with model: @user, local: true do |f| %>
+  <div class='form-group'>
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :email %><br/>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :password %><br/>
+    <%= f.text_field :password %>
+  </div>
+  <div>
+    <%= f.label :confirm_password %><br/>
+    <%= f.text_field :password_confirmation %>
+  </div>
+  <%= f.submit 'Register', class: 'btn btn-primary' %>
+<% end %>
