@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_action :logged_in_user, except: [:index, :show]
   def index
     @tickets = Ticket.all
   end
@@ -32,7 +33,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
 
     add_tags
-
+    
     if @ticket.update(ticket_params)
       flash[:notice] = 'Ticket has been updated.'
       redirect_to tickets_path
@@ -58,6 +59,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name, :body, :status, :project_id)
+    params.require(:ticket).permit(:name, :body, :status, :project_id, :user_id)
   end
 end

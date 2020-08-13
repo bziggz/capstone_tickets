@@ -15,7 +15,9 @@
           <%= link_to ticket.name, ticket_path(ticket.id) %>
         </td>
         <td>
-          <%= %> 
+        <% if ticket.user_id %>
+          <%= User.find(ticket.user_id).name %>
+          <% end %>
         </td>
         <td>
           <%= format_status(ticket) %>

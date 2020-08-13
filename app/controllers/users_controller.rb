@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, except: [:index, :show]
   def new
     @user = User.new
   end
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+
   end
   
   private

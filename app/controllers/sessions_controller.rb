@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to projects_path
     else
+      flash.now[:danger] = 'Invalid Username or Password'
       render 'new'
     end
   end

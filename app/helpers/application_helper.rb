@@ -28,4 +28,14 @@ module ApplicationHelper
 
     result
   end
+
+  def users_array
+    result = [['No One', nil]]
+
+    User.all.each do |user|
+      result.push([user.name, user.id])
+    end
+
+    result
+  end
 end

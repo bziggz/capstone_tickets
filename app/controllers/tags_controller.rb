@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  before_action :logged_in_user, except: [:index, :show]
   before_action :find_tag, only: [:show, :edit, :update, :destroy]
 
   def index
