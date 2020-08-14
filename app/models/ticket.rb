@@ -6,6 +6,8 @@ class Ticket < ActiveRecord::Base
   has_many :ticket_tags
   has_many :tags, through: :ticket_tags
 
+  has_many :comments, dependent: :delete_all
+
   validates :name, presence: true, length: { minimum: 5 }
   validates :status, inclusion: { in: %w(new blocked in_progress fixed) }, presence: true
 end

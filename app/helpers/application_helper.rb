@@ -12,7 +12,7 @@ module ApplicationHelper
   def format_status(ticket)
     status_hash = { 'new' => 'New',
                   'fixed' => 'Fixed',
-                  'in_process' => 'In Process',
+                  'in_progress' => 'In Progress',
                   'blocked' => 'Blocked'
                 }
 

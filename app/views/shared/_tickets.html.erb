@@ -15,8 +15,8 @@
           <%= link_to ticket.name, ticket_path(ticket.id) %>
         </td>
         <td>
-        <% if ticket.assignee %>
-          <%= User.find(ticket.assignee).name %>
+          <% if ticket.assignee %>
+            <%= User.find(ticket.assignee).name %>
           <% end %>
         </td>
         <td>
@@ -37,3 +37,4 @@
     <% end %>
   </tbody>
 </table>
+

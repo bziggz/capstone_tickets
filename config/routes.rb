@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
 
   resources :projects
-  resources :tickets
+  resources :tickets do
+    resources :comments, except: [:index, :show] 
+  end
   resources :tags
   resources :users
 end

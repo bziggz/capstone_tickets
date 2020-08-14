@@ -1,11 +1,13 @@
 class TicketsController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
+
   def index
     @tickets = Ticket.all
   end
 
   def show
     @ticket = Ticket.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -21,7 +23,7 @@ class TicketsController < ApplicationController
     @ticket.creator_id = current_user.id
 
     add_tags
-    puts @ticket
+
     if @ticket.save
       flash[:success] = 'Ticket had been created.'
       redirect_to tickets_path
