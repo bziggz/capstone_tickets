@@ -1,7 +1,9 @@
+<div class='text-center'>
   <%= form_with model: @tag, local: true do |f| %>
-  <div class='form-group'>
-    <%= f.label :name %><br/>
-    <%= f.text_field :name %>
-  </div>
-  <%= f.submit @tag.new_record? ? 'Create Tag' : 'Update Tag', class: 'btn btn-primary' %>
-<% end %>
+    <div class='form-group'>
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit @tag.new_record? ? 'Create Tag' : 'Update Tag', class: 'btn btn-primary' %>
+  <% end %>
+</div>

@@ -1,34 +1,35 @@
-<%= form_with model: @ticket, local: true do |f| %>
-  <div class='form-group'>
-    <%= f.label :project %><br/>
-    <%= f.select :project_id, projects_array %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :name %><br/>
-    <%= f.text_field :name %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :body %><br/>
-    <%= f.text_area :body %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :status %><br/>
-    <%= f.select :status, [['New', 'new'], ['Blocked', 'blocked'],
-      ['In Progress', 'in_progress'], ['Fixed', 'fixed']] %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :assigned_to %><br/>
-    <%= f.select :assignee, users_array %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :tags %><br/>
-    <% Tag.all.sort_by { |tag| tag.name }.each do |tag| %>
-      <div class="form-check form-check-inline">
-        <%= check_box_tag 'tags[]', tag.id, @ticket.tags.include?(tag), {class: 'form-check-input'} %>
-        <%= f.label tag.name, class: 'form-check-label' %>
-      </div>
-    <% end %>
-    <%= link_to 'New Tag', new_tag_path %>
-  </div>
-  <%= f.submit @ticket.new_record? ? 'Create Ticket' : 'Update Ticket', class: 'btn btn-primary' %>
-<% end %>
+<div class='text-center mt-3'>
+  <%= form_with model: @ticket, local: true do |f| %>
+    <div class='form-group'>
+      <%= f.label :project %>
+      <%= f.select :project_id, projects_array %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :body %><br/>
+      <%= f.text_area :body %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :status %>
+      <%= f.select :status, status_array %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :assigned_to %>
+      <%= f.select :assignee, users_array %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :tags, class: 'mb-3' %><br/>
+      <% Tag.all.sort_by { |tag| tag.name }.each do |tag| %>
+        <div class="form-check form-check-inline">
+          <%= check_box_tag 'tags[]', tag.id, @ticket.tags.include?(tag), {class: 'form-check-input'} %>
+          <%= f.label tag.name, class: 'form-check-label' %>
+        </div>
+      <% end %>
+      <%= link_to 'New Tag', new_tag_path, class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+    <%= f.submit @ticket.new_record? ? 'Create Ticket' : 'Update Ticket', class: 'btn btn-primary' %>
+  <% end %>
+</div>

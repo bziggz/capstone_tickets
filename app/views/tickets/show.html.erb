@@ -6,16 +6,16 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Status</th>
-      <th>Creator</th>
-      <th>Assignee</th>
+      <th class='text-center'>Status</th>
+      <th class='text-center'>Creator</th>
+      <th class='text-center'>Assignee</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%= format_status(@ticket) %></td>
-      <td><%= User.find(@ticket.creator_id).name %></td>
-      <td>
+      <td class='text-center'><%= format_status(@ticket) %></td>
+      <td class='text-center'><%= User.find(@ticket.creator_id).name %></td>
+      <td class='text-center'>
         <% if @ticket.assignee %>
           <%= User.find(@ticket.assignee).name %>
         <% end %>
@@ -24,28 +24,30 @@
   </tbody>
 </table>
 
-<h4>Comments</h4>
+<div class='ml-3 mt-5'>
+  <h4>Comments</h4>
 
-<% if @ticket.comments.size > 0 %>
-  <% @ticket.comments.each do |comment| %>
-    <div>
-      <div>
-        <%= comment.body %><br/>
-        <p class='font-weight-lighter'>posted by <%= User.find(comment.creator).name %> 
-        XXX days ago<%= comment.created_at == comment.updated_at ? '' : ' - (edited)'%></p>
+  <% if @ticket.comments.size > 0 %>
+    <% @ticket.comments.each do |comment| %>
+      <div class='card mt-3'>
+        <div class='card-header'>
+            <p class='font-weight-lighter'>posted by <%= User.find(comment.creator).name %> 
+            XXX days ago<%= comment.created_at == comment.updated_at ? '' : ' - (edited)'%></p>
+        </div>
+        <div class='card-body'>
+          <%= comment.body %>
+                      <% if comment.creator == current_user.id.to_s %>
+              <div class='text-right'>
+                <%= link_to 'Edit', edit_ticket_comment_path(@ticket.id, comment.id), class: 'btn btn-sm btn-primary'%>
+                <%= link_to 'Delete', ticket_comment_path(@ticket.id, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
+              </div>
+            <% end %>
+        </div>
       </div>
-      <div>
-        <% if comment.creator == current_user.id.to_s %>
-          <p>
-            <%= link_to 'Edit', edit_ticket_comment_path(@ticket.id, comment.id) %> | 
-            <%= link_to 'Delete', ticket_comment_path(@ticket.id, comment.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </p>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <p>No comments to display</p>
-<% end %>
-
+  <%# <% else %>
+    <%# <p>No comments to display</p> %>
+  <% end%>
+  <% end %> 
+</div>
+<div class='text-center mt-3'>
 <%= render 'comments/form', ticket_obj: @ticket, comment_obj: @comment %>

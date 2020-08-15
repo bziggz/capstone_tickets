@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
     add_tags
 
     if @ticket.save
-      flash[:success] = 'Ticket had been created.'
+      flash[:success] = 'Ticket has been created.'
       redirect_to tickets_path
     else
       render new_ticket_path
@@ -41,7 +41,7 @@ class TicketsController < ApplicationController
     add_tags
 
     if @ticket.update(ticket_params)
-      flash[:notice] = 'Ticket has been updated.'
+      flash[:success] = 'Ticket has been updated.'
       redirect_to tickets_path
     else
       render :edit

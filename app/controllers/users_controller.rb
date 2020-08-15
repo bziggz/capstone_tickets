@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, except: %i[index show]
+  before_action :logged_in_user, except: %i[new create]
 
   def new
     @user = User.new
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Registration Successful'
       redirect_to projects_path
     else
-      render 'new'
+      render 'users/new'
     end
   end
 

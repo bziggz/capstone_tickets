@@ -6,4 +6,6 @@
 
 <%= render 'shared/tickets', ticket_obj: @tickets %>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<div class='text-center'>
+  <%= link_to 'New Ticket', new_ticket_path, class: 'btn btn-primary' %>
+</div>

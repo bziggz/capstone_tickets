@@ -1,36 +1,40 @@
 <table class="table table-striped table-bordered">
+  <% if ticket_obj.size == 0 %>
+    <p>There are no tickets to display. <%= link_to 'Create a Ticket', new_ticket_path %></p>
+  <% end %>
+
   <thead>
     <tr>
-      <th scope='col'>Name</th>
-      <th scope='col'>Assignee</th>
-      <th scope='col'>Status</th>
-      <th scope='col'>Tags</th>
+      <th class='text-center'>Name</th>
+      <th class='text-center'>Assignee</th>
+      <th class='text-center'>Status</th>
+      <th class='text-center'>Tags</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @tickets.each do |ticket| %>
-      <tr scope='row'>
-        <td>
+    <% ticket_obj.each do |ticket| %>
+      <tr>
+        <td class='text-center'>
           <%= link_to ticket.name, ticket_path(ticket.id) %>
         </td>
-        <td>
+        <td class='text-center'>
           <% if ticket.assignee %>
             <%= User.find(ticket.assignee).name %>
           <% end %>
         </td>
-        <td>
+        <td class='text-center'>
           <%= format_status(ticket) %>
         </td>
-        <td>
+        <td class='text-center'>
           <% if ticket.tags.size > 0 %>
-            <%= ticket.tags.map { |tag| tag.name }.sort.join(', ') %>
+            <%= ticket.tags.map(&:name).sort.join(', ') %>
           <% end %>
         </td>
         <td>
-          <p>
-            <%= link_to 'Edit', edit_ticket_path(ticket.id) %> |
-            <%= link_to 'Delete', ticket_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <p class='text-center'>
+            <%= link_to 'Edit', edit_ticket_path(ticket.id), class: 'btn btn-sm btn-primary'%>
+            <%= link_to 'Delete', ticket_path(ticket.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
           </p>
         </td>
       </tr>

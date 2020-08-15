@@ -1,9 +1,10 @@
+
 <% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
+  <div class='alert alert-<%= type %>'>
+      <%= flash[type] %>
   </div>
 <% end %>
 
-<p class='lead'>
+<h3 class='text-center mt-4 mb-3 text-uppercase'>
   <%= title %><br/>
-</p>
+</h3>

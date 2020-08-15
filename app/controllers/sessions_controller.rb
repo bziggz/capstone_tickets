@@ -3,8 +3,9 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(name: params[:session][:name])
-    if user&.authenticate(params[:session][:password_digest])
+    if user &.authenticate(params[:session][:password_digest])
       log_in user
+      flash[:success] = 'Login Successful'
       redirect_to projects_path
     else
       flash.now[:danger] = 'Invalid Username or Password'
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    flash[:success] = 'You have been logged out.'
     redirect_to root_url
   end
 end

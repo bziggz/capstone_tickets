@@ -1,9 +1,9 @@
 <%= render 'shared/navigation' %>
 
-<%= render 'shared/content_title', title: 'Editing Project' %>
+<%= render 'shared/content_title', title: 'Editing Project: ' + @project.name %>
 
 <%= render 'form' %>
 
-<p>
+<p class='text-center mt-3'>
   <%= link_to 'Show Project', project_path %> | <%= link_to 'Back to Projects', projects_path %>
 </p>

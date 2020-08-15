@@ -3,7 +3,8 @@ class TagsController < ApplicationController
   before_action :find_tag, only: %i[show edit update destroy]
 
   def index
-    @tags = Tag.all.sort_by { |tag| tag.name }
+    @tags = Tag.all.sort_by(&:name)
+    @tickets_per_tag = Tag.joins(:ticket_tags).group(:tag_id).size
   end
 
   def show; end

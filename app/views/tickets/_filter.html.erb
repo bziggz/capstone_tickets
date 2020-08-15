@@ -1,5 +1,5 @@
 <%= form_with url: tickets_path, method: "get", local: true do |f| %>
-  <div class="form-group text-right">
+  <div class="form-group text-right mr-3"><small>
     <p>Showing Tickets For Project:
         <%= f.select :project_id, {}, { prompt: 'Any Project' } do %>
           <% projects_array.each do |project| %>
@@ -35,5 +35,5 @@
     </p>
     <%= f.submit 'Apply Filters', class: 'btn btn-primary btn-sm mb-2' %><br/>
     <%= link_to 'Clear Filters', tickets_path, class: 'btn btn-outline-primary btn-sm' %>
-  </div>
+  </small></div>
 <% end %> 

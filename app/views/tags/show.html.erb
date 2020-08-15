@@ -1,6 +1,8 @@
 <%= render 'shared/navigation' %>
-<%= render 'shared/content_title', title: 'Showing Tickets for Tag: ' + @tag.name %>
+<%= render 'shared/content_title', title: 'Showing Tickets for Tag: '  + @tag.name %>
 
 <%= render 'shared/tickets', ticket_obj: @tag.tickets %>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<div class='text-center'>
+  <%= link_to 'New Ticket', new_ticket_path, class: 'btn btn-primary' %>
+</div>

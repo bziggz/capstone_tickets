@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      flash[:notice] = 'Your project has been added to the system.'
+      flash[:success] = 'Your project has been added to the system.'
 
       redirect_to projects_path
     else
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update(project_params)
-      flash[:notice] = 'Your project has been updated.'
+      flash[:success] = 'Your project has been updated.'
 
       redirect_to projects_path
     else

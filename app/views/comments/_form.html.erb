@@ -1,13 +1,14 @@
-<%= form_with model: [ticket_obj, comment_obj], local: true do |f| %>
-  <div class='form-group'>
-    <%= f.label comment_obj.new_record? ? :add_a_comment : 'Currently: ' + comment_obj.body %><br/>
-    <%= f.text_area :body %>
-  </div>
-  <div class='form-group'>
-    <%= f.label 'Update Status'%><br/>
-    <%= f.select :status_update, options_for_select([['New', 'new'], ['Blocked', 'blocked'],
-      ['In Progress', 'in_progress'], ['Fixed', 'fixed']], selected: ticket_obj.status) %>
-  </div>
-  <%= f.submit comment_obj.new_record? ? 'Add Comment' : 'Update Comment', class: 'btn btn-primary' %>
-  <%= f.submit 'Update Status Only', class: 'btn btn-primary' %>
-<% end %>
+<div class='ml-3'>
+  <%= form_with model: [ticket_obj, comment_obj], local: true do |f| %>
+    <div class='form-group'>
+      <%= f.label comment_obj.new_record? ? :add_a_comment : 'Currently: ' + comment_obj.body %><br/>
+      <%= f.text_area :body %>
+    </div>
+    <div class='form-group'>
+      <%= f.label 'Update Status'%><br/>
+      <%= f.select :status_update, options_for_select(status_array, selected: ticket_obj.status) %>
+    </div>
+    <%= f.submit comment_obj.new_record? ? 'Add Comment' : 'Update Comment', class: 'btn btn-primary btn-sm' %>
+    <%= f.submit 'Update Status Only', class: 'btn btn-primary btn-sm' %>
+  <% end %>
+</div>

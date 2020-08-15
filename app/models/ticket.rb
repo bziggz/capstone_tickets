@@ -1,8 +1,8 @@
 class Ticket < ActiveRecord::Base
   scope :filter_by_project, ->(project_id) { where project_id: project_id }
   scope :filter_by_status, ->(status) { where status: status }
-  scope :filter_by_tag, ->(tag_id) { joins(:ticket_tags).where('tag_id = ?', tag_id) }
-  
+  scope :filter_by_tag, ->(tag_id) { joins(:ticket_tags).where(tag_id: tag_id) }
+
   belongs_to :project, foreign_key: :project_id
 
   belongs_to :user, foreign_key: :user_id, optional: true

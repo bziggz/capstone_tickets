@@ -15,7 +15,7 @@ module ApplicationHelper
     Tag.all.sort_by(&:name).each do |tag|
       result.push([tag.name, tag.id])
     end
-
+    
     result
   end
 

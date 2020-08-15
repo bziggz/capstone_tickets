@@ -2,25 +2,29 @@
 
 <%= render 'shared/content_title', title: 'Projects' %>
 
+  <% if @projects.size == 0 %>
+    <p>There are no projects to display. <%= link_to 'Create a Project', new_project_path %></p>
+  <% end %>
+
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th >Name</th>
-      <th class='number'>Open Tickets</th>
-      <th class='number'>Total Tickets</th>
+      <th class='text-center'>Name</th>
+      <th class='number text-center'>Open Tickets</th>
+      <th class='number text-center'>Total Tickets</th>
     </tr>
   </thead>
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td>
+        <td class='text-center'>
           <%= link_to project.name, project_path(project.id) %><br>
           <%= project.description%>          
         </td>
-        <td>
-          <%= project.tickets.size - project.tickets.where(status: 'fixed' ).size %>
+        <td class='text-center'>
+          <%= project.tickets.where.not(status: 'fixed' ).size %>
         </td>
-        <td>
+        <td class='text-center'>
           <%= project.tickets.size %>
         </td>
       </tr>
@@ -28,4 +32,6 @@
   </tbody>
 </table>
 
-<%= link_to 'New Project', new_project_path %>
+<div class='text-center'>
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-primary ml-3'%>
+</div>
