@@ -32,11 +32,11 @@
       <div class='card mt-3'>
         <div class='card-header'>
             <p class='font-weight-lighter'>posted by <%= User.find(comment.creator).name %> 
-            XXX days ago<%= comment.created_at == comment.updated_at ? '' : ' - (edited)'%></p>
+            <%= time_ago_in_words(comment.created_at) %> ago<%= comment.created_at == comment.updated_at ? '' : ' - (edited)'%></p>
         </div>
         <div class='card-body'>
           <%= comment.body %>
-                      <% if comment.creator == current_user.id.to_s %>
+            <% if current_user && comment.creator == current_user.id.to_s %>
               <div class='text-right'>
                 <%= link_to 'Edit', edit_ticket_comment_path(@ticket.id, comment.id), class: 'btn btn-sm btn-primary'%>
                 <%= link_to 'Delete', ticket_comment_path(@ticket.id, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
