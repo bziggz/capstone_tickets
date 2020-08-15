@@ -1,9 +1,9 @@
 class TagsController < ApplicationController
-  before_action :logged_in_user, except: [:index, :show]
-  before_action :find_tag, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, except: %i[index show]
+  before_action :find_tag, only: %i[show edit update destroy]
 
   def index
-    @tags = Tag.all
+    @tags = Tag.all.sort_by { |tag| tag.name }
   end
 
   def show; end
@@ -18,7 +18,7 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
 
     if @tag.save
-      flash[:success] = "Tag successfully created"
+      flash[:success] = 'Tag successfully created'
       redirect_to tags_path
     else
       render 'new'
@@ -27,7 +27,7 @@ class TagsController < ApplicationController
 
   def update
     if @tag.update(tag_params)
-      flash[:success] = "Tag was successfully updated"
+      flash[:success] = 'Tag was successfully updated'
       redirect_to tags_path
     else
       render 'edit'
@@ -53,4 +53,3 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   end
 end
-

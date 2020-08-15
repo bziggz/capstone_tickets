@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :tickets do
-    resources :comments, except: [:index, :show] 
+    resources :comments, except: %i[index show]
   end
   resources :tags
   resources :users

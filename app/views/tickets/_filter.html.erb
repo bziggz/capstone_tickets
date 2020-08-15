@@ -1,0 +1,39 @@
+<%= form_with url: tickets_path, method: "get", local: true do |f| %>
+  <div class="form-group text-right">
+    <p>Showing Tickets For Project:
+        <%= f.select :project_id, {}, { prompt: 'Any Project' } do %>
+          <% projects_array.each do |project| %>
+            <% if params[:project_id].to_i == project.last %>
+              <%= content_tag(:option, project.first, value: project.last, selected: 'selected') %>
+            <% else %>
+              <%= content_tag(:option, project.first, value: project.last) %>
+            <% end %>
+          <% end %>
+        <% end %>
+    </p>
+    <p>With Status:
+      <%= f.select :status, {},  { prompt: 'Any Status' } do %>
+          <% status_array.each do |status_arr| %>
+            <% if params[:status] == status_arr.last %>
+              <%= content_tag(:option, status_arr.first, value: status_arr.last, selected: 'selected') %>
+            <% else %>
+              <%= content_tag(:option, status_arr.first, value: status_arr.last) %>
+            <% end %>
+        <% end %>
+      <% end %>
+    </p>
+    <p>Tagged:
+      <%= f.select :tag, {}, { prompt: 'Any Tag' } do %>
+        <% tags_array.each do |tag_arr| %>
+          <% if params[:tag].to_i == tag_arr.last %>
+            <%= content_tag(:option, tag_arr.first, value: tag_arr.last, selected: 'selected') %>
+          <% else %>
+            <%= content_tag(:option, tag_arr.first, value: tag_arr.last) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </p>
+    <%= f.submit 'Apply Filters', class: 'btn btn-primary btn-sm mb-2' %><br/>
+    <%= link_to 'Clear Filters', tickets_path, class: 'btn btn-outline-primary btn-sm' %>
+  </div>
+<% end %> 

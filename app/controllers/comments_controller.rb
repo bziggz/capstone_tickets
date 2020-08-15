@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user
-  before_action :get_ticket_and_comment, only: [:edit, :destroy]
+  before_action :get_ticket_and_comment, only: %i[edit destroy]
 
   def new
     @comment = Comment.new
@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy 
+    @comment.destroy
 
     redirect_to ticket_path(@ticket.id)
   end
@@ -71,4 +71,3 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 end
-

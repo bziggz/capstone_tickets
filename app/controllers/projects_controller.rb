@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :logged_in_user, except: [:index, :show]
+  before_action :logged_in_user, except: %i[index show]
   def index
     @projects = Project.all
   end
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @project = Project.find(params[:id])
 
     @project.destroy

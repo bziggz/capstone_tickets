@@ -2,6 +2,8 @@
 
 <%= render 'shared/content_title', title: 'Tickets' %>
 
+<%= render 'filter' %>
+
 <%= render 'shared/tickets', ticket_obj: @tickets %>
 
 <%= link_to 'New Ticket', new_ticket_path %>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, except: [:index, :show]
-  
+  before_action :logged_in_user, except: %i[index show]
+
   def new
     @user = User.new
   end
@@ -10,22 +10,18 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      flash[:success] = "Object successfully created"
+      flash[:success] = 'Registration Successful'
       redirect_to projects_path
     else
       render 'new'
     end
   end
 
-  def edit
+  def edit; end
 
-  end
-  
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-  
 end
-

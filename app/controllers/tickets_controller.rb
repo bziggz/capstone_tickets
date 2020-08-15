@@ -1,8 +1,11 @@
 class TicketsController < ApplicationController
-  before_action :logged_in_user, except: [:index, :show]
+  before_action :logged_in_user, except: %i[index show]
 
   def index
     @tickets = Ticket.all
+    @tickets = @tickets.filter_by_project(params[:project_id]) if params[:project_id].present?
+    @tickets = @tickets.filter_by_status(params[:status]) if params[:status].present?
+    @tickets = @tickets.filter_by_tag(params[:tag]) if params[:tag].present?
   end
 
   def show
@@ -36,7 +39,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
 
     add_tags
-    
+
     if @ticket.update(ticket_params)
       flash[:notice] = 'Ticket has been updated.'
       redirect_to tickets_path
@@ -56,7 +59,7 @@ class TicketsController < ApplicationController
 
   def add_tags
     if params[:tags]
-      tags = params[:tags].map {|tag_id| Tag.find(tag_id)}
+      tags = params[:tags].map { |tag_id| Tag.find(tag_id) }
       @ticket.tags = tags
     end
   end
